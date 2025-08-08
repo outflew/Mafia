@@ -1,11 +1,13 @@
 from random import choice
 from time import sleep
+from collections import Counter
 
 import audio
 import player
 
 def mostFrequent(List):
-    return max(set(List),key=List.count)
+    occurence_count = Counter(List)
+    return occurence_count.most_common(1)[0][0]
 
 def wait(t):
     sleep(t)
@@ -251,6 +253,7 @@ def execution():
     print("It's execution time! The player being executed is...")
     audio.playAudio(audio.EXECUTION)
     print(mostFrequent(voted))
+    print(livingPlayers[mostFrequent(voted)].name)
     wait(5)
 
 def endGame():

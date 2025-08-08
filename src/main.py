@@ -1,3 +1,4 @@
+#import audio_setup
 import app
 import game_logic
 # Modules

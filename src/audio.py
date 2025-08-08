@@ -1,3 +1,10 @@
+import tempfile
+import os
+
+temp_dir = "C:/Mafia/temp"
+os.makedirs(temp_dir, exist_ok=True)
+tempfile.tempdir = temp_dir
+
 from gtts import gTTS
 from pydub import AudioSegment
 from pydub.playback import play 
