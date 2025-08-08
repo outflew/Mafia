@@ -230,30 +230,52 @@ def day():
     print("You have 30 seconds to discuss who you think is the Mafia!")
     audio.playAudio(audio.DISCUSS)
     wait(2)
-    countdown(30)
+    countdown(1)
 
 def vote():
     print("Times up! Now you must vote on which player to execute!")
     audio.playAudio(audio.VOTE)
     wait(1)
-    try:
-        for i in range(len(livingPlayers)):
-            print(livingPlayers[i].name + " choose who to vote.")
-            print("List of players:")
-            printPlayerList(livingPlayers)
-            votedNum = int(input("Enter the NUMBER of the player you want to vote: "))
-            voted.append(votedNum)
-            wait(2)
-            clear()
-    except Exception as e:
-        print(e)
+    while True:
+        try:
+            for i in range(len(livingPlayers)):
+                print(livingPlayers[i].name + " choose who to vote.")
+                print("List of players:")
+                printPlayerList(livingPlayers)
+                vote = input("Enter the NUMBER of the player you want to vote: ")
+                votedNum = int(vote)
+                voted.append(votedNum)
+                wait(2)
+                #clear()
+                break
+        except Exception as e:
+            print(e)
+            print("invalid input")
+            continue
     
 
 def execution():
     print("It's execution time! The player being executed is...")
     audio.playAudio(audio.EXECUTION)
-    print(mostFrequent(voted))
-    print(livingPlayers[mostFrequent(voted)].name)
+    executedPlayer = livingPlayers[mostFrequent(voted)-1]
+    print(executedPlayer.name)
+    executedPlayer.die()
+    movePlayer = None
+    for i in range(len(livingPlayers)):
+        currentPlayer = livingPlayers[i]
+        if currentPlayer.isAlive == False:
+            movePlayer = currentPlayer
+
+    if movePlayer != None:
+        livingPlayers.remove(movePlayer)
+        deadPlayers.append(movePlayer)
+        
+        if movePlayer.team == "Bad":
+            global badTeamNumber
+            badTeamNumber -= 1
+        elif movePlayer.team == "Good":
+            global goodTeamNumber
+            goodTeamNumber -= 1
     wait(5)
 
 def endGame():
