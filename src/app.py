@@ -1,8 +1,9 @@
 from kivy.app import App
+from pathlib import Path
 
 class mainApp(App):
     def build(self):
-        self.icon = ""
+        self.icon = str(Path("assets\\images\\mafia_logo.png"))
 
 
 if __name__ == "__main__":
