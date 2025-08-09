@@ -1,5 +1,6 @@
 import tempfile
 import os
+import subprocess
 
 temp_dir = "C:/Mafia/temp"
 os.makedirs(temp_dir, exist_ok=True)
@@ -11,21 +12,12 @@ from pydub.playback import play
 from pathlib import Path
 
 
-def convertToWav(inputFile, outputFile):
-    # Load your MP3 file
+def convertToWav(inputFile):
     #audio = AudioSegment.from_mp3(inputFile)
+    #audio.export("MAFIA", format="wav")
 
-    #outputFile = audio.export(newName, format="wav")
-    # Export as WAV
-    #return outputFile
-
-    # import required modules
-
-    # assign files
-
-    # convert mp3 file to wav file
-    sound = AudioSegment.from_mp3(inputFile)
-    sound.export(outputFile, format="wav")
+    subprocess.call(['ffmpeg', '-i', inputFile, 'plr.wav'])
+    
 
 
 def playAudio(audioFile):
@@ -35,7 +27,7 @@ def playAudio(audioFile):
 
 
 def textToSpeech(text, filename):
-    tss = gTTS(text, lang='en', tld="co.uk")
+    tss = gTTS(text, lang='en', tld="co.ir")
     return tss.save(filename + ".mp3")
 
 # Module Functions

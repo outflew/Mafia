@@ -1,4 +1,5 @@
 from random import choice
+import random
 from time import sleep
 from collections import Counter
 
@@ -7,7 +8,14 @@ import player
 
 def mostFrequent(List):
     occurence_count = Counter(List)
-    return occurence_count.most_common(1)[0][0]
+    most_common = occurence_count.most_common()
+    if len(most_common) > 1 and most_common[0][1] == most_common[1][1]:
+        print("Its a tie, chadGPT will randomly choose someone to kill")
+        sleep(1)
+        return random.choice([most_common[0][0], most_common[1][0]])
+    else:
+        return most_common[0][0]
+
 
 def wait(t):
     sleep(t)
@@ -126,7 +134,7 @@ def intro():
     print("You Have 15 seconds to talk before night!")
     audio.playAudio(audio.INTRO)
     wait(3)
-    #countdown(15)
+    countdown(15)
 
 def night():
     clear()
@@ -230,7 +238,7 @@ def day():
     print("You have 30 seconds to discuss who you think is the Mafia!")
     audio.playAudio(audio.DISCUSS)
     wait(2)
-    countdown(1)
+    countdown(30)
 
 def vote():
     print("Times up! Now you must vote on which player to execute!")
@@ -246,8 +254,8 @@ def vote():
                 votedNum = int(vote)
                 voted.append(votedNum)
                 wait(2)
-                #clear()
-                break
+                clear()
+            break
         except Exception as e:
             print(e)
             print("invalid input")
