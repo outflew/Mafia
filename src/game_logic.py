@@ -2,6 +2,9 @@ from random import choice
 import random
 from time import sleep
 from collections import Counter
+import os
+from pathlib import Path
+import glob
 
 import audio
 import player
@@ -64,6 +67,9 @@ def hasGameEnded():
     # Check to see if game ended
 
 def intro():
+    files = glob.glob('assets\\plrNames\\*')
+    for f in files:
+        os.remove(f)
     clear()
     print("Welcome to Mafia! I am your host ChadGPT.")
     audio.playAudio(audio.WELCOME)
@@ -134,7 +140,12 @@ def intro():
     print("You Have 15 seconds to talk before night!")
     audio.playAudio(audio.INTRO)
     wait(3)
-    countdown(15)
+    countdown(0)
+
+    for i in livingPlayers:
+        audio.textToSpeech(i.name, f'{i.name}_tts')
+        audio.convertToWav(str(Path(f'assets\\plrNames\\{i.name}')))
+        os.remove(str(Path(f'assets\\plrNames\\{i.name}_tts.mp3')))
 
 def night():
     clear()

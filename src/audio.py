@@ -16,8 +16,8 @@ def convertToWav(inputFile):
     #audio = AudioSegment.from_mp3(inputFile)
     #audio.export("MAFIA", format="wav")
 
-    subprocess.call(['ffmpeg', '-i', inputFile, 'plr.wav'])
-    
+    subprocess.call(['ffmpeg', '-i', f'{inputFile}_tts.mp3', f'{inputFile}_tts.wav'])
+
 
 
 def playAudio(audioFile):
@@ -27,11 +27,10 @@ def playAudio(audioFile):
 
 
 def textToSpeech(text, filename):
-    tss = gTTS(text, lang='en', tld="co.ir")
-    return tss.save(filename + ".mp3")
+    tss = gTTS(text, lang='en', tld="co.uk")
+    return tss.save(str(Path(f'assets\\plrNames\\{filename}.mp3')))
 
 # Module Functions
-
 
 WELCOME = str(Path("assets\\audio\\welcome.wav"))
 INTRO = str(Path("assets\\audio\\intro.wav"))
