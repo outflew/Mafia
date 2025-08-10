@@ -56,6 +56,7 @@ def eliminate(playerNumber):
 # Functions
 
 def hasGameEnded():
+    global winningTeam
     if badTeamNumber == 0:
         winningTeam = "Good"
         return True
@@ -90,8 +91,12 @@ def intro():
         livingPlayers.append(plrObject)
         clear()
 
-
+    for i in livingPlayers:
+        audio.textToSpeech(i.name, f'{i.name}_tts')
+        audio.convertToWav(str(Path(f'assets\\plrNames\\{i.name}')))
+        os.remove(str(Path(f'assets\\plrNames\\{i.name}_tts.mp3')))
     clear()
+    
 
     #Adds every player to the array of players and sets them as civilian by default
 
@@ -126,6 +131,8 @@ def intro():
     for i in range(playerNumber):
         wait(1)
         #players[i].sayName()
+        audio.playAudio(f"assets\\plrNames\\{players[i].name}_tts.wav")
+        audio.playAudio(f"assets\\audio\\role.wav")
         input(players[i].name + " Press Enter to check your role ")
         wait(1)
         print("You are " + players[i].role)
@@ -141,11 +148,6 @@ def intro():
     audio.playAudio(audio.INTRO)
     wait(3)
     countdown(0)
-
-    for i in livingPlayers:
-        audio.textToSpeech(i.name, f'{i.name}_tts')
-        audio.convertToWav(str(Path(f'assets\\plrNames\\{i.name}')))
-        os.remove(str(Path(f'assets\\plrNames\\{i.name}_tts.mp3')))
 
 def night():
     clear()
@@ -239,7 +241,7 @@ def announcement():
     audio.playAudio(audio.GOODMORNING)
     print("Good morning everyone!")
     wait(2)
-    if len(deadPlayers) != 0:
+    if len(deadPlayers) == 0:
         print("Luckly, no players died.")
     else:
         print("Unfortunately, the following players are no longer alive:")
@@ -266,6 +268,8 @@ def vote():
                 print(livingPlayers[i].name + " choose who to vote.")
                 print("List of players:")
                 printPlayerList(livingPlayers)
+                audio.playAudio(f"assets\\plrNames\\{livingPlayers[i].name}_tts.wav")
+                audio.playAudio("assets\\audio\\voting.wav")
                 vote = input("Enter the NUMBER of the player you want to vote: ")
                 votedNum = int(vote)
                 voted.append(votedNum)
