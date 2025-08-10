@@ -4,19 +4,19 @@ import game_logic
 
 
 if __name__ == "__main__": 
-    game_logic.plrObject = game_logic.player.Player(name="a", role="Civilian", team="Good", isAlive=True, audioFile=None) #nameAudio)
+    game_logic.plrObject = game_logic.player.Player(name="ali", role="Civilian", team="Good", isAlive=True, audioFile=None) #nameAudio)
     game_logic.players.append(game_logic.plrObject)
     game_logic.livingPlayers.append(game_logic.plrObject)
 
-    game_logic.plrObject = game_logic.player.Player(name="b", role="Doctor", team="Good", isAlive=True, audioFile=None) #nameAudio)
+    game_logic.plrObject = game_logic.player.Player(name="belal", role="Doctor", team="Good", isAlive=True, audioFile=None) #nameAudio)
     game_logic.players.append(game_logic.plrObject)
     game_logic.livingPlayers.append(game_logic.plrObject)
 
-    game_logic.plrObject = game_logic.player.Player(name="c", role="Detective", team="Good", isAlive=True, audioFile=None) #nameAudio)
+    game_logic.plrObject = game_logic.player.Player(name="omar", role="Detective", team="Good", isAlive=True, audioFile=None) #nameAudio)
     game_logic.players.append(game_logic.plrObject)
     game_logic.livingPlayers.append(game_logic.plrObject)
 
-    game_logic.plrObject = game_logic.player.Player(name="d", role="Mafia", team="Bad", isAlive=True, audioFile=None) #nameAudio)
+    game_logic.plrObject = game_logic.player.Player(name="hamza", role="Mafia", team="Bad", isAlive=True, audioFile=None) #nameAudio)
     game_logic.players.append(game_logic.plrObject)
     game_logic.livingPlayers.append(game_logic.plrObject)
 

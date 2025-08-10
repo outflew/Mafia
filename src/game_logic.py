@@ -239,10 +239,15 @@ def announcement():
     audio.playAudio(audio.GOODMORNING)
     print("Good morning everyone!")
     wait(2)
-    print("Unfortunately, the following players are no longer alive:")
-    audio.playAudio(audio.ANNOUNCEMENT)
-    printPlayerList(deadPlayers)
-    wait(4)
+    if len(deadPlayers) != 0:
+        print("Luckly, no players died.")
+    else:
+        print("Unfortunately, the following players are no longer alive:")
+        audio.playAudio(audio.ANNOUNCEMENT)
+        printPlayerList(deadPlayers)
+        for i in deadPlayers:
+            audio.playAudio(f"assets\\plrNames\\{i.name}_tts.wav")
+        wait(4)
 
 
 def day():
@@ -278,6 +283,7 @@ def execution():
     audio.playAudio(audio.EXECUTION)
     executedPlayer = livingPlayers[mostFrequent(voted)-1]
     print(executedPlayer.name)
+    audio.playAudio(f"assets\\plrNames\\{executedPlayer.name}_tts.wav")
     executedPlayer.die()
     movePlayer = None
     for i in range(len(livingPlayers)):
